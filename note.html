@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux 作業系統筆記</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        code {
+        background-color: #f0f0f0;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #2c55cf;
+        display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Linux 作業系統筆記</h1>
+
+  
+ <h3>1. 主機名稱</h3>
+    <code>hostname</code>：查看主機名稱
+
+    <h3>2. 查看主機 IP</h3>
+    <code>hostname -I</code>：查看主機
+
+    <h3>3. 新增使用者</h3>
+    <code>sudo useradd 使用者名稱</code>
+
+    <h3>4. 設定密碼</h3>
+    <code>sudo passwd 使用者名稱</code>
+
+    <h3>5. 確認目前使用者</h3>
+    <code>whoami</code>
+
+    <h3>6. 變更使用者及群組</h3>
+    <code>chown -R 使用者:群組 目錄檔案</code> 或 <code>chown -R 使用者.群組 目錄檔案</code> 
+
+    <h3>7. 查詢目錄檔案</h3>
+    <code>ls</code>、<code>ls -a</code>、<code>ls -l</code>、<code>ls -al</code>：皆可以查詢目錄下的檔案，指示查詢的細項不同。<code>ls -al</code>顯示最詳細的資料(在Linux中任何檔案開始為 <code>.</code> 的檔案即為隱藏檔)。
+
+    <h3>8. 生成空白檔</h3>
+    <code>touch a</code>
+
+    <h3>9. 刪除檔案</h3>
+    <code>rm -i</code>
+
+    <h3>10. 強制刪除檔案</h3>
+    <code>rm -f</code>
+
+    <h3>11. 使 .bashrc 的變更生效</h3>
+    修改 <code>.bashrc</code> 後，需執行以下其中一個指令：
+    <code>重新連接</code>、<code>source .bashrc</code>或 <code>. .bashrc</code>
+
+    <h3>12. 清空檔案</h3>
+    <code>&gt;a.txt</code>或<code>1&gt;a.txt</code>
+
+    <h3>13. 輸出結果至檔案</h3>
+    <code>ls 1&gt;ok.txt 2&gt;error.txt</code>：會生成 <code>ok.txt</code> 和 <code>error.txt</code> 的檔案，當 <code>ls</code> 正常執行，<code>ok.txt</code> 中會顯示內容，<code>error.txt</code> 為空白檔案；當 <code>ls</code> 執行失敗，<code>ok.txt</code> 為空白檔案、<code>error.txt</code> 會顯示內容。
+    <h4>補充</h4>
+    <code>0</code>：標準輸入 <br>
+    <code>1</code>：標準輸出 <br>
+    <code>2</code>：標準錯誤輸出 <br>
+
+    <h3>14. 錯誤輸出重定向</h3>
+    <code>2&gt;&amp;1</code>：把標準錯誤輸出導向跟標準輸出一樣，當想在檔案中同時看到正確跟錯誤訊息。
+
+    <h3>15. 合併檔案</h3>
+    <code>cat a.txt b.txt &gt; c.txt</code>：將 <code>a.txt</code> 跟 <code>b.txt</code> 合併成 <code>c.txt</code>。
+
+    <h3>16. 條件搜尋檔案</h3>
+    <code>find /usr/lib/ -name "*test*"</code>：在 <code>/usr/lib/</code> 目錄下尋找名字含有 test 的檔案。
+
+    <h4>通配符</h4>
+    <code>*</code>：多個任意字元 <br>
+    <img src="16_1.png" style="width: 100%; max-width: 300px;"><br>
+    <code>?</code>：單個字元 <br>
+    <img src="16_2.png" style="width: 100%; max-width: 300px;"><br>
+    <h3>17. 系統與網路基本指令</h3>
+    <code>poweroff</code>：關機 <br>
+    <code>reboot</code>：重新開機 <br>
+    <code>ifconfig</code> (或 <code>ip a</code>)：查詢網路 <br>
+
+    <h3>18. 查看檔案內容</h3>
+    <code>more</code>：會分頁，只能往下 <br>
+    <code>less</code>：會分頁，可以往上、往下 <br>
+    <code>cat</code>：查看檔案內容 <br>
+    <code>tail -n 5 /etc/passwd</code>：看檔案最後 n 筆（例如查看 <code>/etc/passwd</code> 最後 5 筆資料） <br>
+    <code>head -n 5 /etc/passwd</code>：看檔案前面 n 筆（例如查看 <code>/etc/passwd</code> 前 5 筆資料） <br>
+
+    <h3>19. 尋找檔案工具</h3>
+    <code>find</code>：常搭配 <code>-name</code>、<code>-size</code> 等參數進行搜尋 <br>
+    <code>which</code>：去 <code>$PATH</code> 所記錄的資料夾中搜尋可執行檔 <br>
+    <code>locate</code>：搜尋前要執行 <code>sudo updatedb</code> 更新資料庫 <br>
+
+    <h3>20. Docker 容器管理</h3>
+    <code>sudo docker rm -f container_id</code>：強制刪除正在執行的 docker 容器。
+
+    <h3>21. 指令別名設定</h3>
+    <code>alias mycopy="cp -r"</code>：把 <code>cp -r</code> 指令取別名為 <code>mycopy</code>。
+
+    <h3>22. 終端機快捷鍵</h3>
+    <code>ctrl+A</code>：跳到指令最前面 <br>
+    <code>ctrl+E</code>：跳到指令最後面 <br>
+
+    <h3>23. 背景執行工作</h3>
+    <code>sleep 10000 &amp;</code>：把 <code>sleep 10000</code> 丟到背景執行。
+
+    <h3>24. 背景工作管理</h3>
+    執行 <code>jobs</code> 查詢目前有哪些程式在背景執行，會顯示工作數字。輸入 <code>fg 數字</code>會讓該背景工作跑回前景執行。<br>
+    <img src="24.png" style="width: 100%; max-width: 300px;"><br>
+    <h3>25. 系統程序查詢</h3>
+    <code>ps -ef</code>：查看全系統程序（進程）的執行情況。
+
+    <h3>26. 免除掛斷執行</h3>
+    <code>nohup</code>：讓指令在背景運行，即使關閉終端機仍會繼續執行。
+
+    <h3>27. grep</h3>
+    <code>grep [參數] "關鍵字"</code> <br>
+    參數：<br>
+    <code>-A</code>：after多顯示匹配行之後的幾行 <br>
+    <code>-B</code>：before多顯示匹配行之前的幾行 <br>
+    <code>-i</code>：不分大小寫 <br>
+    <code>-v</code>：排除在外（反向選擇） <br>
+    <code>-n</code>：加上n會列出該關鍵字所在的行數，例如：<code>grep -n aa 1.txt 2.txt</code> <br>
+
+    <h3>28. grep</h3>
+    <code>grep -n aa l.txt 2.txt</code>加上n會列出這兩個檔案中有aa的行數<br>
+    <img src="28.png" style="width: 100%; max-width: 300px;"><br>
+    <h3>29. 進階檔名匹配 (中括號)</h3>
+    <code>ls a[bc]</code>：匹配a後面帶有b或c的檔案（例如ab, ac）<br>
+    <img src="29.png" style="width: 100%; max-width: 300px;"><br>
+    <h3>30. 進階檔名匹配</h3>
+    <code>ls a[^0-9]</code>：匹配a後面不是數字的檔案（例如aa, ab）<br>
+    <img src="30.png" style="width: 100%; max-width: 300px;"><br>
+    
+    <h3>31. 查看系統功能</h3>
+    <code>top</code>：即時查看系統功能與資源使用率（CPU、記憶體、程序）
+
+    <h3>32. 磁碟空間查詢</h3>
+    <code>df -h</code>
+
+    <h1>上課手寫筆記</h1>
+    <img src="w1.jpg" style="width: 100%; max-width: 300px;">
+    <img src="w2.jpg" style="width: 100%; max-width: 300px;">
+    <img src="w3.jpg" style="width: 100%; max-width: 300px;">
+    <img src="w4.jpg" style="width: 100%; max-width: 300px;">
+    <img src="w5.jpg" style="width: 100%; max-width: 300px;">
+
+</body>
+</html>
