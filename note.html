@@ -56,36 +56,36 @@
     <h3>7.查詢目錄檔案</h3>
     <code>ls</code>、<code>ls -a</code>、<code>ls -l</code>、<code>ls -al</code>：皆可以查詢目錄下的檔案，指示查詢的細項不同。<code>ls -al</code>顯示最詳細的資料(在Linux中任何檔案開始為 <code>.</code> 的檔案即為隱藏檔)。
 
-    <h3>8.生成空白檔</h3>
+    <h3>8.生成空白檔a</h3>
     <code>touch a</code>
 
-    <h3>9.刪除檔案(會詢問)</h3>
+    <h3>9.刪除檔案前會詢問</h3>
     <code>rm -i</code>
 
-    <h3>10.強制刪除檔案</h3>
+    <h3>10.直接刪除檔案</h3>
     <code>rm -f</code>
 
-    <h3>11.使 .bashrc 的變更生效</h3>
-    修改 <code>.bashrc</code> 後，需執行以下其中一個指令：
-    <code>重新連接</code>、<code>source .bashrc</code>或 <code>. .bashrc</code>
+    <h3>11.修改.bashrc生效</h3>
+    修改 <code>.bashrc</code> 後，需行以下其中一執個指令：
+    <code>source .bashrc</code>或 <code>. .bashrc</code>
 
     <h3>12.清空檔案</h3>
     <code>&gt;a.txt</code>或<code>1&gt;a.txt</code>
 
-    <h3>13.輸出結果至檔案</h3>
+    <h3>13.輸入及輸出重新導向</h3>
     <code>ls 1&gt;ok.txt 2&gt;error.txt</code>：會生成 <code>ok.txt</code> 和 <code>error.txt</code> 的檔案，當 <code>ls</code> 正常執行，<code>ok.txt</code> 中會顯示內容，<code>error.txt</code> 為空白檔案；當 <code>ls</code> 執行失敗，<code>ok.txt</code> 為空白檔案、<code>error.txt</code> 會顯示內容。
     <h4>補充</h4>
     <code>0</code>：標準輸入 <br>
     <code>1</code>：標準輸出 <br>
     <code>2</code>：標準錯誤輸出 <br>
 
-    <h3>14.錯誤輸出重定向</h3>
+    <h3>14.錯誤輸出重新導向</h3>
     <code>2&gt;&amp;1</code>：把標準錯誤輸出導向跟標準輸出一樣，當想在檔案中同時看到正確跟錯誤訊息。
 
     <h3>15.合併檔案</h3>
     <code>cat a.txt b.txt &gt; c.txt</code>：將 <code>a.txt</code> 跟 <code>b.txt</code> 合併成 <code>c.txt</code>。
 
-    <h3>16.條件搜尋檔案</h3>
+    <h3>16.搜尋檔案(通配服)</h3>
     <code>find /usr/lib/ -name "*test*"</code>：在 <code>/usr/lib/</code> 目錄下尋找名字含有 test 的檔案。
 
     <h4>通配符</h4>
@@ -93,7 +93,7 @@
     <img src="16_1.png" style="width: 100%; max-width: 300px;"><br>
     <code>?</code>：單個字元 <br>
     <img src="16_2.png" style="width: 100%; max-width: 300px;"><br>
-    <h3>17.系統與網路基本指令</h3>
+    <h3>17.linux常見指令</h3>
     <code>poweroff</code>：關機 <br>
     <code>reboot</code>：重新開機 <br>
     <code>ifconfig</code> (或 <code>ip a</code>)：查詢網路 <br>
@@ -105,13 +105,13 @@
     <code>tail</code>：看檔案最後 n 筆（例如查看 <code>/etc/passwd</code> 最後 5 筆資料，<code>tail -n 5 /etc/passwd</code>）<br>
     <code>head</code>：看檔案前面 n 筆（例如查看 <code>/etc/passwd</code> 前 5 筆資料，<code>head -n 5 /etc/passwd</code>）<br>
 
-    <h3>19.尋找檔案工具</h3>
+    <h3>19.尋找檔案(find、which、locate)</h3>
     <code>find</code>：常搭配 <code>-name</code>、<code>-size</code> 等參數進行搜尋 <br>
     <code>which</code>：去$PATH所記錄的資料夾中搜尋可執行檔 <br>
     <code>locate</code>：搜尋前要執行 <code>sudo updatedb</code> 更新資料庫 <br>
 
     <h3>20.Docker容器</h3>
-    <code>sudo docker rm -f container_id</code>：強制刪除正在執行的 docker 容器。
+    <code>sudo docker rm -f container_id</code>：刪除正在執行的docker容器。
 
     <h3>21.指令別名設定</h3>
     <code>alias mycopy="cp -r"</code>：把 <code>cp -r</code> 指令取別名為 <code>mycopy</code>。
@@ -127,26 +127,26 @@
     執行 <code>jobs</code> 查詢目前有哪些程式在背景執行，會顯示工作數字。輸入 <code>fg 數字</code>會讓該背景工作跑回前景執行。<br>
     <img src="24.png" style="width: 100%; max-width: 300px;"><br>
     <h3>25.系統程序查詢</h3>
-    <code>ps -ef</code>：查看全系統程序（進程）的執行情況。
+    <code>ps -ef</code>：查看系統程序執行情況。
 
-    <h3>26.免除掛斷執行</h3>
+    <h3>26.nohup</h3>
     <code>nohup</code>：讓指令在背景運行，即使關閉終端機仍會繼續執行。
 
     <h3>27.grep</h3>
-    <code>grep [參數] "關鍵字"</code> <br>
+    <code>grep -參數 "欲查詢文字"</code> <br>
     參數：<br>
     <code>-A</code>：after多顯示匹配行之後的幾行 <br>
     <code>-B</code>：before多顯示匹配行之前的幾行 <br>
     <code>-i</code>：不分大小寫 <br>
-    <code>-v</code>：排除在外（反向選擇） <br>
-    <code>-n</code>：加上n會列出該關鍵字所在的行數，例如：<code>grep -n aa 1.txt 2.txt</code> <br>
+    <code>-v</code>：排除在外<br>
+    <code>-n</code>：加上n會列出所在的行數，例如：<code>grep -n aa 1.txt 2.txt</code> <br>
     範例如下圖：
     <code>grep -n aa l.txt 2.txt</code>加上n會列出這兩個檔案中有aa的行數<br>
     <img src="28.png" style="width: 100%; max-width: 300px;"><br>
-    <h3>28.進階檔名匹配 (中括號)</h3>
+    <h3>28.進階檔名匹配 ([])</h3>
     <code>ls a[bc]</code>：匹配a後面帶有b或c的檔案（例如ab, ac）<br>
     <img src="29.png" style="width: 100%; max-width: 300px;"><br>
-    <h3>29.進階檔名匹配</h3>
+    <h3>29.進階檔名匹配(^)</h3>
     <code>ls a[^0-9]</code>：匹配a後面不是數字的檔案（例如aa, ab）<br>
     <img src="30.png" style="width: 100%; max-width: 300px;"><br>
     
